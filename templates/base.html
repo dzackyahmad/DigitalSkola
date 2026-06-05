@@ -4,11 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}ChurnAI{% endblock %}</title>
-  <!--
-    TODO FRONTEND
-    Ganti dengan font pilihan designer.
-    Saat ini menggunakan system-ui dari CSS.
-  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/dashboard.css" />
   {% block extra_head %}{% endblock %}
 </head>
@@ -124,17 +121,12 @@
       -->
       <div class="model-tag">
         <span class="dot"></span>
-        XGBoost · F1 96.83%
+        LightGBM · F1 98.4%
       </div>
     </div>
   </nav>
 
   <main class="page-content">
-    <!--
-      DRAFT BANNER — muncul di semua halaman
-      Hapus div.draft-banner ini saat desain final selesai.
-    -->
-
     {% block content %}{% endblock %}
   </main>
 </div>
@@ -158,10 +150,15 @@
   ============================================================
 -->
 <div id="confirmModal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center">
-  <div id="confirmBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.5)"></div>
-  <div style="position:relative;background:#fff;border:1px solid #ccc;border-radius:6px;padding:24px;width:100%;max-width:360px;margin:16px">
-    <h3 id="confirmTitle" style="font-size:15px;font-weight:700;margin-bottom:6px"></h3>
-    <p id="confirmDesc" style="font-size:13px;color:#555;line-height:1.6;margin-bottom:20px"></p>
+  <div id="confirmBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px)"></div>
+  <div style="position:relative;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;width:100%;max-width:380px;margin:16px;box-shadow:0 24px 64px rgba(0,0,0,0.7)">
+    <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:rgba(224,82,82,0.12);color:var(--high)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+      </svg>
+    </div>
+    <h3 id="confirmTitle" style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px"></h3>
+    <p id="confirmDesc" style="font-size:13px;color:var(--text-sub);line-height:1.6;margin-bottom:24px"></p>
     <div style="display:flex;gap:10px;justify-content:flex-end">
       <button id="confirmCancel" class="btn btn-ghost btn-sm">Batal</button>
       <button id="confirmOk" class="btn btn-danger btn-sm">Hapus</button>

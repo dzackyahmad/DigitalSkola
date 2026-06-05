@@ -1,72 +1,58 @@
-/*
- * ============================================================
- * WIREFRAME CSS — Draft Version
- * ============================================================
- * File ini adalah versi minimal yang SENGAJA disederhanakan.
- * Backend, API, dan seluruh integrasi JS sudah selesai.
- *
- * UI Designer bebas mengganti seluruh isi file ini.
- *
- * JANGAN HAPUS class yang digunakan JavaScript:
- *   .risk-badge, .label-badge, .prob-bar-*, .page-btn,
- *   .toast, .loading-overlay, .spinner
- *
- * JANGAN HAPUS CSS variables:
- *   --sidebar-w, --navbar-h
- *
- * JANGAN HAPUS utility classes:
- *   .flex, .items-center, .justify-between, .mb-4, .mb-5,
- *   .text-sm, .text-xs, .text-sub, .text-muted
- * ============================================================
- */
+/* ── Design System ────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* ── CSS Variables ──────────────────────────────────────────────────────── */
 :root {
-  --sidebar-w: 224px;
-  --navbar-h: 56px;
+  --sidebar-w:  224px;
+  --navbar-h:   56px;
 
-  /* Neutral palette — ganti bebas */
-  --bg:        #f4f4f4;
-  --surface:   #ffffff;
-  --surface-2: #f0f0f0;
-  --surface-3: #e8e8e8;
-  --border:    #cccccc;
-  --text:      #111111;
-  --text-sub:  #555555;
-  --text-muted:#888888;
-  --accent:    #333333;
+  /* Backgrounds */
+  --bg:         #0a0a0a;
+  --surface:    #111111;
+  --surface-2:  #1a1a1a;
+  --surface-3:  #222222;
 
-  /* Risk colors — digunakan JS untuk badge warna */
-  --low:    #2a7a2a;
-  --medium: #b05800;
-  --high:   #b52a2a;
-  --blue:   #1a56b0;
-  --purple: #6b3fb5;
+  /* Borders & text */
+  --border:     #2a2a2a;
+  --text:       #f0f0f0;
+  --text-sub:   #a0a0a0;
+  --text-muted: #555555;
+
+  /* Accent — emerald green */
+  --accent:       #50c878;
+  --accent-dark:  #2d8653;
+  --accent-dim:   rgba(80, 200, 120, 0.12);
+  --accent-text:  #50c878;
+
+  /* Semantic — dipakai JS untuk badge warna */
+  --high:   #e05252;
+  --medium: #f59e0b;
+  --low:    #50c878;
+  --blue:   #60a5fa;
+  --purple: #a78bfa;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
 }
 
 /* ── Reset ──────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
   color: var(--text);
   background: var(--bg);
   line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-a { color: inherit; }
+a { color: inherit; text-decoration: none; }
 
 /* ── Sidebar ────────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Sidebar Navigasi
- * Lebar tetap 224px (--sidebar-w) — ubah di :root jika perlu.
- */
 .sidebar {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: var(--sidebar-w);
   height: 100vh;
   background: var(--surface);
@@ -78,85 +64,82 @@ a { color: inherit; }
 }
 
 .sidebar-header {
-  padding: 14px 16px;
+  padding: 18px 16px;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .logo-mark {
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--border);
+  width: 30px; height: 30px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-dark);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.logo-mark svg { width: 14px; height: 14px; }
+.logo-mark svg { width: 14px; height: 14px; color: var(--accent); }
 
 .logo-name {
+  font-size: 16px;
   font-weight: 700;
-  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -0.3px;
 }
 
-.sidebar-nav {
-  padding: 10px 8px;
-  flex: 1;
-}
+.logo-name span { color: var(--accent); }
+
+.sidebar-nav { padding: 10px 8px; flex: 1; }
 
 .nav-section-label {
   display: block;
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   color: var(--text-muted);
-  padding: 6px 8px 2px;
+  padding: 8px 8px 4px;
+  font-weight: 600;
 }
 
-/* Nav links — href dan active class tetap dikelola Jinja2 */
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  text-decoration: none;
-  color: var(--text-sub);
-  border-radius: 4px;
-  margin-bottom: 2px;
+  gap: 9px;
+  padding: 9px 10px;
+  border-radius: 8px;
   font-size: 13px;
-  border: 1px solid transparent;
+  font-weight: 500;
+  color: var(--text-sub);
+  margin-bottom: 2px;
+  transition: background 0.15s, color 0.15s;
 }
 
-.nav-link:hover {
-  background: var(--surface-2);
-  border-color: var(--border);
-}
+.nav-link:hover { background: var(--surface-2); color: var(--text); }
 
 .nav-link.active {
-  background: var(--surface-2);
-  border-color: var(--border);
+  background: var(--accent-dim);
+  color: var(--accent);
   font-weight: 600;
-  color: var(--text);
 }
 
+.nav-link.active .nav-icon svg { color: var(--accent); }
+
 .nav-icon {
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
 
-.nav-icon svg { width: 16px; height: 16px; }
+.nav-icon svg { width: 15px; height: 15px; }
 
 .sidebar-footer {
-  padding: 8px;
+  padding: 12px;
   border-top: 1px solid var(--border);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
 }
 
@@ -169,16 +152,13 @@ a { color: inherit; }
 }
 
 /* ── Navbar ──────────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Top Navbar
- * Tinggi tetap 56px (--navbar-h).
- */
 .navbar {
   position: sticky;
   top: 0;
   height: var(--navbar-h);
-  background: var(--surface);
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -194,96 +174,71 @@ a { color: inherit; }
   font-size: 13px;
 }
 
-.breadcrumb-sep { color: var(--text-muted); }
-.crumb-active   { font-weight: 600; }
+.breadcrumb svg { color: var(--text-muted); }
+.breadcrumb-sep { color: var(--text-muted); font-weight: 400; }
+.crumb-active   { font-weight: 600; color: var(--text); }
 .navbar-right   { display: flex; align-items: center; gap: 12px; }
 
 .model-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-size: 12px;
-  padding: 3px 10px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  font-weight: 500;
+  padding: 4px 12px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-dark);
+  border-radius: 20px;
+  color: var(--accent);
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--low);
+  background: var(--accent);
   display: inline-block;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
 }
 
 /* ── Page Content ────────────────────────────────────────────────────────── */
-.page-content {
-  padding: 24px;
-  flex: 1;
-}
-
-/* ── Draft Banner ────────────────────────────────────────────────────────── */
-/*
- * Ditampilkan di setiap halaman sebagai penanda versi wireframe.
- * Hapus atau ganti gaya ini saat UI final.
- */
-.draft-banner {
-  background: #fffce6;
-  border: 2px dashed #c8a400;
-  border-radius: 4px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  font-size: 12px;
-  color: #555;
-  line-height: 1.7;
-}
-
-.draft-banner strong {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 4px;
-}
+.page-content { padding: 24px; flex: 1; }
 
 /* ── Cards ───────────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Card Container
- */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 12px;
   margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
 }
 
 .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-bottom: 1px solid var(--border);
 }
 
 .card-title {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-weight: 600;
   font-size: 13px;
+  color: var(--text);
 }
 
-.card-title svg { width: 14px; height: 14px; }
+.card-title svg { width: 14px; height: 14px; color: var(--text-muted); }
 
-.card-body { padding: 16px; }
+.card-body { padding: 18px; }
 
 /* ── Metric Grid ─────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Summary Cards (Total, Churn, Rate, HighRisk)
- * IDs pada nilai dipakai JS untuk update: #metricTotal, #metricChurn, dll.
- */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -292,79 +247,53 @@ a { color: inherit; }
 }
 
 .metric-card {
-  background: var(--surface);
-  border: 1px dashed var(--border);
-  border-radius: 4px;
-  padding: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
 }
 
 .metric-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .metric-label {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .metric-icon-wrap {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--border);
+  width: 32px; height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  background: var(--surface-3);
 }
 
 .metric-icon-wrap svg { width: 14px; height: 14px; }
 
-/* Warna class — dipakai template */
-.metric-icon-wrap.purple { border-color: var(--purple); }
-.metric-icon-wrap.red    { border-color: var(--high); }
-.metric-icon-wrap.blue   { border-color: var(--blue); }
+.metric-icon-wrap.purple { background: rgba(167,139,250,0.12); color: var(--purple); }
+.metric-icon-wrap.red    { background: rgba(224, 82, 82,0.12); color: var(--high); }
+.metric-icon-wrap.blue   { background: rgba( 96,165,250,0.12); color: var(--blue); }
+.metric-icon-wrap.green  { background: var(--accent-dim);       color: var(--accent); }
 
-.metric-value        { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.metric-value        { font-size: 28px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.5px; }
 .metric-value.purple { color: var(--purple); }
 .metric-value.red    { color: var(--high); }
 .metric-value.blue   { color: var(--blue); }
+.metric-value.green  { color: var(--accent); }
 
-.metric-sub { font-size: 11px; color: var(--text-muted); }
+.metric-sub { font-size: 12px; color: var(--text-muted); }
 
-/* ── Chart Placeholder ───────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Chart Area
- * Canvas tetap ada di dalam untuk JS rendering.
- * Designer bebas mengganti tampilan area ini.
- */
-.chart-placeholder {
-  border: 2px dashed #bbb;
-  border-radius: 4px;
-  padding: 16px 12px;
-  min-height: 210px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--text-muted);
-  background: #fafafa;
-  font-size: 12px;
-  line-height: 1.7;
-  gap: 4px;
-}
-
-.chart-placeholder strong {
-  font-size: 13px;
-  color: var(--text-sub);
-}
-
+/* ── Chart Grid ──────────────────────────────────────────────────────────── */
 .chart-grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -374,155 +303,199 @@ a { color: inherit; }
 
 .chart-wrap { position: relative; }
 
+/* Placeholder (wireframe mode) */
+.chart-placeholder {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--surface-3);
+  font-size: 12px;
+  line-height: 1.7;
+  gap: 4px;
+}
+
+.chart-placeholder strong { font-size: 13px; color: var(--text-sub); }
+
 /* ── Filter Bar ──────────────────────────────────────────────────────────── */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 10px;
-  padding: 12px 16px;
+  padding: 14px 18px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 12px;
   margin-bottom: 16px;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .filter-group label {
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .filter-select,
 .filter-input {
-  height: 30px;
-  padding: 0 8px;
+  height: 32px;
+  padding: 0 10px;
   border: 1px solid var(--border);
-  border-radius: 3px;
-  background: var(--surface);
+  border-radius: 8px;
+  background: var(--surface-2);
   font-size: 12px;
   color: var(--text);
-  min-width: 110px;
+  min-width: 116px;
+  outline: none;
+  transition: border-color 0.15s;
 }
 
+.filter-select:focus,
+.filter-input:focus { border-color: var(--accent); }
+
 /* ── Buttons ─────────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Tombol
- * Jangan hapus ID tombol — dipakai JS.
- */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
+  padding: 8px 16px;
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--text);
   text-decoration: none;
   line-height: 1;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 
-.btn:disabled      { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
-.btn svg           { width: 14px; height: 14px; flex-shrink: 0; }
-.btn-primary       { background: #222; color: #fff; border-color: #222; }
-.btn-secondary     { background: var(--surface-2); }
-.btn-ghost         { background: transparent; }
-.btn-danger        { color: var(--high); border-color: var(--high); background: transparent; }
-.btn-sm            { padding: 4px 10px; font-size: 12px; }
+.btn:hover    { background: var(--surface-3); border-color: #3a3a3a; }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.btn svg      { width: 14px; height: 14px; flex-shrink: 0; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #0a0a0a;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.btn-primary:hover { background: #5dd88a; border-color: #5dd88a; }
+
+.btn-secondary { background: var(--surface-3); border-color: var(--border); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-sub);
+}
+
+.btn-ghost:hover { background: var(--surface-2); border-color: var(--border); color: var(--text); }
+
+.btn-danger {
+  background: var(--high);
+  color: #fff;
+  border-color: var(--high);
+}
+
+.btn-danger:hover { background: #cc3a3a; border-color: #cc3a3a; }
+
+.btn-sm { padding: 5px 11px; font-size: 12px; border-radius: 6px; }
 
 /* ── Tabs ────────────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Tab Navigation (CSV / Manual)
- * Jangan hapus id="tabCsvBtn", id="tabManualBtn" — dipakai upload.js.
- */
 .tab-bar {
   display: flex;
   border-bottom: 1px solid var(--border);
   margin-bottom: 16px;
+  gap: 4px;
 }
 
 .tab-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   padding: 10px 16px;
   border: none;
   border-bottom: 2px solid transparent;
   background: transparent;
   cursor: pointer;
   font-size: 13px;
+  font-weight: 500;
   color: var(--text-sub);
+  font-family: inherit;
+  transition: color 0.15s;
 }
 
+.tab-btn:hover { color: var(--text); }
+
 .tab-btn.active {
-  border-bottom-color: var(--text);
+  border-bottom-color: var(--accent);
+  color: var(--accent);
   font-weight: 600;
-  color: var(--text);
 }
 
 .tab-btn svg { width: 14px; height: 14px; }
 
 /* ── Upload Zone ─────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: CSV Upload Area
- * id="uploadZone" dipakai upload.js untuk drag-drop.
- */
 .upload-zone {
   border: 2px dashed var(--border);
-  border-radius: 4px;
-  padding: 32px 24px;
+  border-radius: 12px;
+  padding: 36px 24px;
   text-align: center;
   cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.upload-zone:hover { background: var(--surface-2); }
+.upload-zone:hover {
+  border-color: var(--accent-dark);
+  background: var(--accent-dim);
+}
 
-.upload-icon     { margin-bottom: 10px; }
+.upload-icon     { margin-bottom: 12px; }
 .upload-icon svg { width: 36px; height: 36px; color: var(--text-muted); }
 
 .file-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px;
-  border: 1px solid var(--border);
-  border-radius: 3px;
+  padding: 5px 14px;
+  border: 1px solid var(--accent-dark);
+  border-radius: 20px;
   font-size: 12px;
-  background: var(--surface-2);
+  background: var(--accent-dim);
+  color: var(--accent);
 }
 
-.file-chip svg { width: 13px; height: 13px; }
+.file-chip svg { width: 12px; height: 12px; }
 
 /* ── Form ────────────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Manual Prediction Form
- * Jangan ubah name attribute pada setiap input — dipakai manual.js.
- */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 16px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .form-label {
@@ -533,19 +506,19 @@ a { color: inherit; }
 
 .form-input,
 .form-select {
-  padding: 7px 10px;
+  padding: 8px 12px;
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 8px;
   font-size: 13px;
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--text);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
 }
 
 .form-input:focus,
-.form-select:focus {
-  outline: 2px solid var(--text);
-  outline-offset: 1px;
-}
+.form-select:focus { border-color: var(--accent); }
 
 /* ── Quick Stats ─────────────────────────────────────────────────────────── */
 .quick-stats {
@@ -556,22 +529,17 @@ a { color: inherit; }
 }
 
 .qs-card {
-  padding: 12px;
-  border: 1px dashed var(--border);
-  border-radius: 4px;
+  padding: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   text-align: center;
 }
 
 .qs-val   { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-.qs-label { font-size: 11px; color: var(--text-muted); }
+.qs-label { font-size: 11px; color: var(--text-muted); font-weight: 500; }
 
 /* ── Table ───────────────────────────────────────────────────────────────── */
-/*
- * TODO FRONTEND
- * Komponen: Data Table
- * Jangan hapus class .sortable dan id pada th — dipakai JS sorting.
- * Jangan hapus id="resultBody" — dipakai JS untuk render rows.
- */
 .table-wrapper { overflow-x: auto; }
 
 .data-table {
@@ -582,7 +550,7 @@ a { color: inherit; }
 
 .data-table th,
 .data-table td {
-  padding: 9px 12px;
+  padding: 10px 14px;
   text-align: left;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
@@ -591,72 +559,63 @@ a { color: inherit; }
 .data-table th {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   color: var(--text-muted);
   font-weight: 600;
   background: var(--surface-2);
 }
 
 .data-table tr:hover td { background: var(--surface-2); }
-.data-table .sortable   { cursor: pointer; user-select: none; }
+.data-table .sortable { cursor: pointer; user-select: none; }
+.data-table .sortable:hover { color: var(--accent); }
 
-/* ── Risk Badges — JANGAN HAPUS, dipakai result.html inline JS ───────────── */
+/* ── Risk Badges — JANGAN HAPUS ──────────────────────────────────────────── */
 .risk-badge {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 3px;
+  padding: 3px 9px;
+  border-radius: 20px;
   font-size: 11px;
   font-weight: 600;
-  border: 1px solid;
 }
 
-.risk-badge.High    { color: var(--high);       border-color: var(--high);   background: #fff2f2; }
-.risk-badge.Medium  { color: var(--medium);     border-color: var(--medium); background: #fff8ee; }
-.risk-badge.Low     { color: var(--low);        border-color: var(--low);    background: #f0fff0; }
-.risk-badge.Unknown { color: var(--text-muted); border-color: var(--border); background: var(--surface-2); }
+.risk-badge.High   { color: var(--high);   background: rgba(224, 82, 82,0.12); }
+.risk-badge.Medium { color: var(--medium); background: rgba(245,158, 11,0.12); }
+.risk-badge.Low    { color: var(--low);    background: var(--accent-dim); }
+.risk-badge.Unknown { color: var(--text-muted); background: var(--surface-3); }
 
-/* ── Label Badges — JANGAN HAPUS, dipakai result.html inline JS ──────────── */
+/* ── Label Badges — JANGAN HAPUS ─────────────────────────────────────────── */
 .label-badge {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 3px;
+  padding: 3px 9px;
+  border-radius: 20px;
   font-size: 11px;
   font-weight: 600;
-  border: 1px solid;
 }
 
-.label-badge.churn    { color: var(--high); border-color: var(--high); background: #fff2f2; }
-.label-badge.no-churn { color: var(--low);  border-color: var(--low);  background: #f0fff0; }
+.label-badge.churn    { color: var(--high); background: rgba(224,82,82,0.12); }
+.label-badge.no-churn { color: var(--low);  background: var(--accent-dim); }
 
-/* ── Probability Bar — JANGAN HAPUS, dipakai result.html inline JS ───────── */
-.prob-bar-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+/* ── Probability Bar — JANGAN HAPUS ─────────────────────────────────────── */
+.prob-bar-wrapper { display: flex; align-items: center; gap: 8px; }
 
 .prob-bar-bg {
   flex: 1;
-  height: 6px;
+  height: 5px;
   background: var(--surface-3);
   border-radius: 3px;
   overflow: hidden;
 }
 
-.prob-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  /* background set inline by JS */
-}
+.prob-bar-fill { height: 100%; border-radius: 3px; }
 
 .prob-value {
   font-size: 12px;
   font-weight: 600;
-  min-width: 36px;
+  min-width: 38px;
   text-align: right;
 }
 
-/* ── Pagination — JANGAN HAPUS, dipakai result.html inline JS ────────────── */
+/* ── Pagination — JANGAN HAPUS ───────────────────────────────────────────── */
 .pagination {
   display: flex;
   flex-wrap: wrap;
@@ -666,17 +625,21 @@ a { color: inherit; }
 }
 
 .page-btn {
-  padding: 4px 10px;
+  padding: 5px 10px;
   border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 3px;
+  background: var(--surface-2);
+  border-radius: 6px;
   cursor: pointer;
   font-size: 12px;
-  color: var(--text);
+  font-weight: 500;
+  color: var(--text-sub);
+  font-family: inherit;
+  transition: background 0.12s, color 0.12s;
 }
 
-.page-btn.active   { background: var(--text); color: var(--surface); border-color: var(--text); }
-.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.page-btn:hover    { background: var(--surface-3); color: var(--text); }
+.page-btn.active   { background: var(--accent); color: #0a0a0a; border-color: var(--accent); font-weight: 600; }
+.page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
 /* ── Search ──────────────────────────────────────────────────────────────── */
 .search-wrap {
@@ -687,43 +650,47 @@ a { color: inherit; }
 
 .search-wrap > svg {
   position: absolute;
-  left: 8px;
-  width: 13px;
-  height: 13px;
+  left: 10px;
+  width: 13px; height: 13px;
   color: var(--text-muted);
   pointer-events: none;
 }
 
 .search-input {
-  padding: 5px 8px 5px 28px;
+  padding: 6px 10px 6px 30px;
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 8px;
   font-size: 13px;
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--text);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
 }
+
+.search-input:focus { border-color: var(--accent); }
 
 /* ── Empty State ─────────────────────────────────────────────────────────── */
 .empty-state {
   text-align: center;
-  padding: 48px 20px;
+  padding: 56px 24px;
   color: var(--text-muted);
 }
 
-.empty-icon         { margin-bottom: 12px; }
-.empty-icon svg     { width: 32px; height: 32px; }
-.empty-state h3     { font-size: 14px; color: var(--text-sub); margin-bottom: 6px; font-weight: 600; }
-.empty-state p      { font-size: 13px; }
-.empty-state a      { color: var(--text); text-decoration: underline; }
+.empty-icon            { margin-bottom: 14px; }
+.empty-icon svg        { width: 36px; height: 36px; color: var(--text-muted); opacity: 0.5; }
+.empty-state h3        { font-size: 15px; color: var(--text-sub); margin-bottom: 7px; font-weight: 600; }
+.empty-state p         { font-size: 13px; line-height: 1.6; }
+.empty-state a         { color: var(--accent); }
 
 /* ── Divider ─────────────────────────────────────────────────────────────── */
-.divider { height: 1px; background: var(--border); margin: 12px 0; }
+.divider { height: 1px; background: var(--border); margin: 14px 0; }
 
-/* ── Toast — JANGAN HAPUS, dipakai showToast() di base.html ─────────────── */
+/* ── Toast — JANGAN HAPUS ────────────────────────────────────────────────── */
 #toast-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 24px;
+  right: 24px;
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -733,26 +700,36 @@ a { color: inherit; }
 .toast {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 10px;
+  padding: 11px 16px;
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 10px;
   background: var(--surface);
   font-size: 13px;
-  min-width: 220px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  min-width: 240px;
+  box-shadow: var(--shadow-md);
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(20px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }
 
 .toast svg    { width: 16px; height: 16px; flex-shrink: 0; }
-.toast.success { border-color: var(--low); }
-.toast.error   { border-color: var(--high); }
-.toast.info    { border-color: var(--blue); }
+.toast.success { border-color: rgba(80,200,120,0.3); }
+.toast.success svg { color: var(--accent); }
+.toast.error   { border-color: rgba(224,82,82,0.3); }
+.toast.error   svg { color: var(--high); }
+.toast.info    { border-color: rgba(96,165,250,0.3); }
+.toast.info    svg { color: var(--blue); }
 
-/* ── Loading Overlay — JANGAN HAPUS, dipakai showLoading() ──────────────── */
+/* ── Loading Overlay — JANGAN HAPUS ─────────────────────────────────────── */
 .loading-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.75);
+  background: rgba(10,10,10,0.7);
+  backdrop-filter: blur(4px);
   z-index: 9000;
   display: flex;
   align-items: center;
@@ -760,17 +737,16 @@ a { color: inherit; }
 }
 
 .spinner {
-  width: 32px;
-  height: 32px;
+  width: 34px; height: 34px;
   border: 3px solid var(--border);
-  border-top-color: var(--text);
+  border-top-color: var(--accent);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Utility Classes — dipakai template dan JS ───────────────────────────── */
+/* ── Utility Classes ─────────────────────────────────────────────────────── */
 .flex            { display: flex; }
 .items-center    { align-items: center; }
 .justify-between { justify-content: space-between; }
@@ -782,7 +758,7 @@ a { color: inherit; }
 .text-muted      { color: var(--text-muted); }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .chart-grid-2 { grid-template-columns: 1fr; }
   .form-grid    { grid-template-columns: repeat(2, 1fr); }

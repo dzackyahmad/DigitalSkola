@@ -234,18 +234,30 @@
         </span>
         <span class="text-xs text-muted" id="donutSubtitle">Churn vs Non-Churn</span>
       </div>
-      <div class="card-body">
-        <div class="chart-placeholder">
-          <strong>TODO: Chart — Distribusi Churn (Donut)</strong>
-          <span>Data: GET /api/insight/charts → churn_distribution</span>
-          <span>Canvas #chartDonut di bawah — jangan hapus</span>
-          <div style="display:flex;gap:16px;margin-top:6px;font-size:11px">
-            <span>Churn: <strong id="legendChurn">—</strong></span>
-            <span>Non-Churn: <strong id="legendNonChurn">—</strong></span>
-          </div>
-          <span id="donutPct" style="font-size:18px;font-weight:700;margin-top:4px">—</span>
+      <div class="card-body" style="display:flex;align-items:center;gap:24px;padding:20px 24px">
+        <div style="width:180px;height:180px;position:relative;flex-shrink:0">
           <!-- Canvas wajib ada untuk charts.js -->
-          <canvas id="chartDonut" style="display:none"></canvas>
+          <canvas id="chartDonut"></canvas>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none">
+            <span style="font-size:22px;font-weight:700;color:var(--text)" id="donutPct">—</span>
+            <span style="font-size:10px;color:var(--text-muted)">Churn Rate</span>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface-2);border-radius:8px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--high);flex-shrink:0"></div>
+              <span class="text-sm text-sub">Churn</span>
+            </div>
+            <span style="font-size:15px;font-weight:700;color:var(--text)" id="legendChurn">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface-2);border-radius:8px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+              <span class="text-sm text-sub">Non-Churn</span>
+            </div>
+            <span style="font-size:15px;font-weight:700;color:var(--text)" id="legendNonChurn">—</span>
+          </div>
         </div>
       </div>
     </div>
@@ -265,13 +277,9 @@
         </span>
       </div>
       <div class="card-body">
-        <div class="chart-placeholder">
-          <strong>TODO: Chart — Distribusi Probabilitas (Histogram)</strong>
-          <span>Data: GET /api/insight/charts → probability_distribution</span>
-          <span>10 bucket dari 0.0 hingga 1.0</span>
-          <span>Canvas #chartProbDist di bawah — jangan hapus</span>
+        <div class="chart-wrap" style="height:188px">
           <!-- Canvas wajib ada untuk charts.js -->
-          <canvas id="chartProbDist" style="display:none"></canvas>
+          <canvas id="chartProbDist"></canvas>
         </div>
       </div>
     </div>
@@ -300,13 +308,9 @@
         </span>
       </div>
       <div class="card-body">
-        <div class="chart-placeholder">
-          <strong>TODO: Chart — Churn by Tenure Group (Stacked Bar)</strong>
-          <span>Data: GET /api/insight/charts → tenure_groups</span>
-          <span>4 grup: 0-6, 7-12, 13-24, 25+ bulan</span>
-          <span>Canvas #chartTenure di bawah — jangan hapus</span>
+        <div class="chart-wrap" style="height:188px">
           <!-- Canvas wajib ada untuk charts.js -->
-          <canvas id="chartTenure" style="display:none"></canvas>
+          <canvas id="chartTenure"></canvas>
         </div>
       </div>
     </div>
@@ -326,13 +330,9 @@
         </span>
       </div>
       <div class="card-body">
-        <div class="chart-placeholder">
-          <strong>TODO: Chart — Churn by Kategori Produk (Bar)</strong>
-          <span>Data: GET /api/insight/charts → category_churn</span>
-          <span>Kategori: Laptop, Mobile, Fashion, Grocery, Others</span>
-          <span>Canvas #chartCategory di bawah — jangan hapus</span>
+        <div class="chart-wrap" style="height:188px">
           <!-- Canvas wajib ada untuk charts.js -->
-          <canvas id="chartCategory" style="display:none"></canvas>
+          <canvas id="chartCategory"></canvas>
         </div>
       </div>
     </div>
@@ -361,13 +361,9 @@
         </span>
       </div>
       <div class="card-body">
-        <div class="chart-placeholder">
-          <strong>TODO: Chart — Churn by Marital Status (Grouped Bar)</strong>
-          <span>Data: GET /api/insight/charts → marital_churn</span>
-          <span>3 grup: Single, Married, Divorced</span>
-          <span>Canvas #chartMarital di bawah — jangan hapus</span>
+        <div class="chart-wrap" style="height:188px">
           <!-- Canvas wajib ada untuk charts.js -->
-          <canvas id="chartMarital" style="display:none"></canvas>
+          <canvas id="chartMarital"></canvas>
         </div>
       </div>
     </div>
@@ -387,13 +383,9 @@
         </span>
       </div>
       <div class="card-body">
-        <div class="chart-placeholder">
-          <strong>TODO: Chart — Churn by Payment Mode (Bar)</strong>
-          <span>Data: GET /api/insight/charts → payment_churn</span>
-          <span>Mode: Debit, Credit, UPI, E-wallet, COD</span>
-          <span>Canvas #chartPayment di bawah — jangan hapus</span>
+        <div class="chart-wrap" style="height:188px">
           <!-- Canvas wajib ada untuk charts.js -->
-          <canvas id="chartPayment" style="display:none"></canvas>
+          <canvas id="chartPayment"></canvas>
         </div>
       </div>
     </div>

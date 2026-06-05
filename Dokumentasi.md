@@ -10,8 +10,8 @@
 | Database / Penyimpanan Data | ✅ Selesai (in-memory) | Backend Dev |
 | Endpoint prediksi & insight | ✅ Selesai & sudah diuji | Backend Dev |
 | Frontend — Struktur & Integrasi | ✅ Selesai | Backend Dev |
-| Frontend — Tampilan Visual & UI | 🎨 Belum dimulai | **UI Designer** |
-| Deployment ke Vercel | ⏳ Menunggu UI selesai | Backend Dev |
+| Frontend — Tampilan Visual & UI | ✅ Selesai (dark theme) | Backend Dev |
+| Deployment ke Vercel | ⏳ Siap deploy | Backend Dev |
 
 ---
 
@@ -33,15 +33,17 @@ Semua fitur sudah diuji otomatis dan hasilnya:
 ```
 Artinya tidak ada bug pada sisi backend.
 
-### 3. Model ML Belum Ada
-Saat ini aplikasi berjalan **tanpa model**. 
-Setiap prediksi akan mengembalikan.
-- Label: **Tidak Churn**
-- Probabilitas: **0.0%**
-- Risk Level: **Low**
+### 3. Model LightGBM Sudah Aktif
+Model machine learning sudah terintegrasi penuh.
+- Model: **LightGBM** (F1=0.984, Recall=0.968, ROC-AUC=0.9996)
+- File: `model/model_lightgbm.pkl` + `model/preprocessor.pkl`
+- Pipeline: raw input → ColumnTransformer (scale + OHE) → LightGBM predict
 
-### 4. Frontend Sudah Diubah ke Mode Wireframe
-Tampilan aplikasi saat ini sengaja disederhanakan menjadi hitam-putih polos. Semua tombol, form, tabel, dan chart sudah ada — hanya tampilannya yang belum didesain.
+### 4. Frontend Dark Theme Selesai
+Tampilan sudah didesain ulang dengan design system emerald dark:
+- Background hitam `#0a0a0a`, card `#111111`, accent hijau `#50c878`
+- Font: Inter, border-radius 12px card / 8px input
+- Navbar blur effect, animasi pulse pada model tag
 
 ---
 
