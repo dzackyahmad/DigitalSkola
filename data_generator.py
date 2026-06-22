@@ -3,7 +3,7 @@ import numpy as np
 
 np.random.seed(42)
 
-n = 10_000  # Ubah disini aja
+n = 1_000  # Ubah disini aja
 
 df = pd.DataFrame({
     "CustomerID": [f"C{i:06d}" for i in range(1, n + 1)],
